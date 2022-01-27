@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_贪吃蛇练习项目" default="compile.module.贪吃蛇练习项目">
+  <dirname property="module.贪吃蛇练习项目.basedir" file="${ant.file.module_贪吃蛇练习项目}"/>
+  
+  <property name="module.jdk.home.贪吃蛇练习项目" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.贪吃蛇练习项目" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.贪吃蛇练习项目" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.贪吃蛇练习项目" value="-encoding UTF-8 -source 13 -target 13 ${compiler.args}"/>
+  
+  <property name="贪吃蛇练习项目.output.dir" value="${module.贪吃蛇练习项目.basedir}/out/production/贪吃蛇练习项目"/>
+  <property name="贪吃蛇练习项目.testoutput.dir" value="${module.贪吃蛇练习项目.basedir}/out/test/贪吃蛇练习项目"/>
+  
+  <path id="贪吃蛇练习项目.module.bootclasspath">
+    <!-- 路径被列入编译 bootclasspath -->
+  </path>
+  
+  <path id="贪吃蛇练习项目.module.production.classpath">
+    <path refid="${module.jdk.classpath.贪吃蛇练习项目}"/>
+  </path>
+  
+  <path id="贪吃蛇练习项目.runtime.production.module.classpath">
+    <pathelement location="${贪吃蛇练习项目.output.dir}"/>
+  </path>
+  
+  <path id="贪吃蛇练习项目.module.classpath">
+    <path refid="${module.jdk.classpath.贪吃蛇练习项目}"/>
+    <pathelement location="${贪吃蛇练习项目.output.dir}"/>
+  </path>
+  
+  <path id="贪吃蛇练习项目.runtime.module.classpath">
+    <pathelement location="${贪吃蛇练习项目.testoutput.dir}"/>
+    <pathelement location="${贪吃蛇练习项目.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.贪吃蛇练习项目">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.贪吃蛇练习项目">
+    <patternset refid="excluded.from.module.贪吃蛇练习项目"/>
+  </patternset>
+  
+  <path id="贪吃蛇练习项目.module.sourcepath">
+    <dirset dir="${module.贪吃蛇练习项目.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.贪吃蛇练习项目" depends="compile.module.贪吃蛇练习项目.production,compile.module.贪吃蛇练习项目.tests" description="编辑 模块 贪吃蛇练习项目"/>
+  
+  <target name="compile.module.贪吃蛇练习项目.production" depends="register.custom.compilers" description="编译 模块 贪吃蛇练习项目; 生产类">
+    <mkdir dir="${贪吃蛇练习项目.output.dir}"/>
+    <javac2 destdir="${贪吃蛇练习项目.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.贪吃蛇练习项目}/javac">
+      <compilerarg line="${compiler.args.贪吃蛇练习项目}"/>
+      <bootclasspath refid="贪吃蛇练习项目.module.bootclasspath"/>
+      <classpath refid="贪吃蛇练习项目.module.production.classpath"/>
+      <src refid="贪吃蛇练习项目.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.贪吃蛇练习项目"/>
+    </javac2>
+    
+    <copy todir="${贪吃蛇练习项目.output.dir}">
+      <fileset dir="${module.贪吃蛇练习项目.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.贪吃蛇练习项目.tests" depends="register.custom.compilers,compile.module.贪吃蛇练习项目.production" description="编译 模块 贪吃蛇练习项目; 测试类" unless="skip.tests"/>
+  
+  <target name="clean.module.贪吃蛇练习项目" description="清理模块">
+    <delete dir="${贪吃蛇练习项目.output.dir}"/>
+    <delete dir="${贪吃蛇练习项目.testoutput.dir}"/>
+  </target>
+</project>
